@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "app/v1/")
 public class LoginController {
 
-    @GetMapping(name = "test")
+    @GetMapping(value = "test")
     public String testApi(){
         return "first springboot application";
     }
