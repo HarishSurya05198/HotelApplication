@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hotel.booking.entity.HotelEntity;
+import com.hotel.booking.model.HotelModel;
 import com.hotel.booking.repository.HotelRepository;
 
 @Service
@@ -15,8 +16,19 @@ public class HotelService {
 	@Autowired
 	private HotelRepository hotel;
 	
-	public Boolean addHotelRoom(HotelEntity e) {
+	public Boolean addHotelRoom(HotelModel hotelVal) {
+		HotelEntity e = new HotelEntity();
 		try {
+			e.setId(hotelVal.getId());
+			e.setName(hotelVal.getName());
+			e.setPhNumber(hotelVal.getPhNumber());
+			e.setRent(hotelVal.getRent());
+			e.setDesc(hotelVal.getDesc());
+			e.setType(hotelVal.getType());
+			e.setMxcount(hotelVal.getMxcount());
+			e.setImages(hotelVal.getImages());
+			e.setBookingDetails(hotelVal.getBookingDetails());
+			System.out.println("room max count- "+e.getMxcount());
 			hotel.save(e);
 			return true;
 		}

@@ -1,41 +1,23 @@
-package com.hotel.booking.entity;
+package com.hotel.booking.model;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Table(name="hotels")
-@Entity
-public class HotelEntity {
+public class HotelModel {
 	
-	@Id
 	private Integer id;
 	
-	@Column(name="name")
 	private String name;
 	
-	@Column(name="imageUrls")
 	private String[] images = new String[0];
 	
-	@Column(name="rentPerDay")
 	private Integer rent;
 	
-	@Column(name="type")
 	private String type;
 	
-	@Column(name="maxCount")
 	private Integer mxcount;
 	
-	@Column(name="phoneNumber")
 	private Long phNumber;
 	
-	@Column(name="currentBookings")
-	private String[] bookingDetails = new String[0];
+	private String[] bookingDetails;
 	
-	@Column(name="description")
 	private String desc;
 
 	public Integer getId() {
@@ -109,5 +91,5 @@ public class HotelEntity {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	
+
 }
