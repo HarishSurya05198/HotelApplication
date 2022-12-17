@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.booking.entity.HotelEntity;
+import com.hotel.booking.model.HotelModel;
 import com.hotel.booking.service.HotelService;
 
 @RestController
-@RequestMapping(value="app/v1/")
+@RequestMapping(value="api/rooms/")
 public class HotelController {
 	
 	@Autowired
 	private HotelService hotel;
 	
-	@GetMapping(value="get/allHotels")
+	@GetMapping(value="get/hotels")
 	public List<HotelEntity> gethotels(){
 		List<HotelEntity> resp = hotel.getAllHotels();
 		return resp;
@@ -27,10 +28,10 @@ public class HotelController {
 	
 	
 	@PostMapping(value="add/hotels")
-	public String addHotels(@RequestBody HotelEntity e) {
+	public String addHotels(@RequestBody HotelModel hotels) {
 		boolean checkflag;
 		String resp;
-		checkflag = hotel.addHotelRoom(e);
+		checkflag = hotel.addHotelRoom(hotels);
 		if(checkflag == true) {
 			resp = "Room added successfully";
 		}
