@@ -14,7 +14,7 @@ import com.hotel.booking.model.UserModel;
 import com.hotel.booking.service.UserService;
 
 @RestController
-@RequestMapping(value="app/user/")
+@RequestMapping(value="api/user/")
 public class UserController {
 	
 	@Autowired

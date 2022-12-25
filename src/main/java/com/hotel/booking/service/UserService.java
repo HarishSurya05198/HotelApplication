@@ -19,7 +19,6 @@ public class UserService {
 	public boolean addUser(UserModel u) {
 		try {
 			UserEntity users = new UserEntity();
-			users.setId(u.getId());
 			users.setName(u.getName());
 			users.setEmail(u.getEmail());
 			users.setPassword(u.getPassword());
