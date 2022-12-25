@@ -19,7 +19,6 @@ public class HotelService {
 	public Boolean addHotelRoom(HotelModel hotelVal) {
 		HotelEntity e = new HotelEntity();
 		try {
-			e.setId(hotelVal.getId());
 			e.setName(hotelVal.getName());
 			e.setPhNumber(hotelVal.getPhNumber());
 			e.setRent(hotelVal.getRent());
