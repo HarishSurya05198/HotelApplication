@@ -1,21 +1,31 @@
 package com.hotel.booking.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hotel.booking.entity.BookingEntity;
 import com.hotel.booking.entity.HotelEntity;
 import com.hotel.booking.model.HotelModel;
+import com.hotel.booking.repository.BookingRepository;
 import com.hotel.booking.repository.HotelRepository;
 
 @Service
 public class HotelService {
-	
+	private final Logger logger = LoggerFactory.getLogger(HotelService.class);
+
 	@Autowired
 	private HotelRepository hotel;
-	
+
+	@Autowired
+	private BookingRepository book;
+
 	public Boolean addHotelRoom(HotelModel hotelVal) {
 		HotelEntity e = new HotelEntity();
 		try {
@@ -27,21 +37,44 @@ public class HotelService {
 			e.setMxcount(hotelVal.getMxcount());
 			e.setImages(hotelVal.getImages());
 			e.setBookingDetails(hotelVal.getBookingDetails());
-			System.out.println("room max count- "+e.getMxcount());
 			hotel.save(e);
 			return true;
-		}
-		catch (Exception exp) {
+		} catch (Exception exp) {
 			return false;
 		}
 	}
-	
-	public List<HotelEntity> getAllHotels(){
+
+	public List<HotelEntity> getAllHotels() {
 		try {
 			List<HotelEntity> list = hotel.findAll();
 			return list;
+		} catch (Exception e) {
+			return null;
 		}
-		catch(Exception e) {
+	}
+
+	public List<HotelEntity> getHotels(String start, String end) {
+		List<BookingEntity> b = book.findAll();
+		List<HotelEntity> finalval = hotel.findAll();
+		LocalDate st = LocalDate.parse(start);
+		LocalDate en = LocalDate.parse(end);
+		try {
+		for (int i = 0; i < b.size(); i++) {
+			LocalDate tempS = LocalDate.parse(b.get(i).getStart_date().toString());
+			LocalDate tempE = LocalDate.parse(b.get(i).getEnd_date().toString());
+			boolean case_a = st.isAfter(tempS) && st.isBefore(tempE);
+			boolean case_b = en.isAfter(tempS) && en.isBefore(tempE);
+			if (case_a == true || case_b == true) {
+				for(int j=0;j<finalval.size();j++) {
+					if(finalval.get(j).getId() == b.get(i).getHotel().getId()) {
+						finalval.remove(j);
+					}
+				}
+			}
+		}
+		return finalval;
+		}
+		catch (Exception e) {
 			return null;
 		}
 	}
