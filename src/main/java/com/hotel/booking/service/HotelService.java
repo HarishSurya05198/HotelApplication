@@ -2,8 +2,12 @@ package com.hotel.booking.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +51,15 @@ public class HotelService {
 	public List<HotelEntity> getAllHotels() {
 		try {
 			List<HotelEntity> list = hotel.findAll();
+			Map<String,Object> obj = new LinkedHashMap<>();
+			list.stream().forEach(i ->{
+				obj.put(i.getId().toString(), i);
+			});
+			List<Integer> withDupes = Arrays.asList(10, 10, 20, 20, 30, 30, 40, 50);
+			logger.info("with dupes {}",withDupes);
+			List<Integer> withoutdupes = withDupes.stream().distinct().toList();
+			logger.info("wtihout dupes {}",withoutdupes);
+			logger.info("new obj {}",obj);
 			return list;
 		} catch (Exception e) {
 			return null;

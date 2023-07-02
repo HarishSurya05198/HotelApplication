@@ -33,7 +33,7 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping(value="login")
+	@PostMapping(value="login")
 	public ResponseEntity<?> loginUser(@RequestBody UserModel u){
 		UserEntity userResp = users.loginUser(u);
 		if(userResp != null) {
