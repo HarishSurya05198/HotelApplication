@@ -27,5 +27,17 @@ public class smsController {
 			return "Something went wrong";
 		}
 	}
+	
+	@PostMapping("verify-phone")
+	public String verify_otp(@RequestBody smsModel input) {
+		System.out.println("otp entered : "+input.getOtp());
+		Boolean checkFlag = otps.verifyOtp(input);
+		if(checkFlag) {
+			return "OTP Verified Successfully";
+		}
+		else {
+			return "Invalid OTP";
+		}
+	}
 
 }
