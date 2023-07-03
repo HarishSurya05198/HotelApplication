@@ -1,5 +1,8 @@
 package com.hotel.booking.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,26 +20,32 @@ public class smsController {
 	sendOtpService otps;
 	
 	@PostMapping("send-phone")
-	public String send_otp(@RequestBody smsModel input) {
+	public Map<String, String> send_otp(@RequestBody smsModel input) {
 		System.out.println("sms will be sent for phone number : "+input.getPhone_number());
 		Boolean checkFlag = otps.sendOtp(input);
+		Map<String,String> resp = new HashMap<>();
 		if(checkFlag) {
-			return "OTP Sent Successfully";
+			resp.put("message", "OTP Sent Successfully");
+			return resp;
 		}
 		else {
-			return "Something went wrong";
+			resp.put("message","Something went wrong");
+			return resp;
 		}
 	}
 	
 	@PostMapping("verify-phone")
-	public String verify_otp(@RequestBody smsModel input) {
+	public Map<String,String> verify_otp(@RequestBody smsModel input) {
 		System.out.println("otp entered : "+input.getOtp());
 		Boolean checkFlag = otps.verifyOtp(input);
+		Map<String,String> resp = new HashMap<>();
 		if(checkFlag) {
-			return "OTP Verified Successfully";
+			resp.put("message", "OTP Verified Successfully");
+			return resp;
 		}
 		else {
-			return "Invalid OTP";
+			resp.put("message", "Invalid OTP");
+			return resp;
 		}
 	}
 

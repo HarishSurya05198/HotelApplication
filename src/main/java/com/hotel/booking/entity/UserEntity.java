@@ -23,6 +23,9 @@ public class UserEntity {
 	
 	@Column(name="email",unique = true)
 	private String email;
+	
+	@Column(name="phone_number")
+	private String phone_number;
 
 
 	public Integer getId() {
@@ -55,6 +58,14 @@ public class UserEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
 	}
 	
 }

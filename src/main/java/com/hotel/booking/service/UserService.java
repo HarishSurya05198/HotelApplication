@@ -24,6 +24,7 @@ public class UserService {
 				users.setName(u.getName());
 				users.setEmail(u.getEmail());
 				users.setPassword(u.getPassword());
+				users.setPhone_number(u.getPhone());
 				us.save(users);
 				return true;
 			} else {
