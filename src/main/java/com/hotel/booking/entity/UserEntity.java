@@ -13,7 +13,7 @@ public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Integer id;
 	
 	@Column(name="name")
 	private String name;
@@ -21,14 +21,18 @@ public class UserEntity {
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="email")
+	@Column(name="email",unique = true)
 	private String email;
+	
+	@Column(name="phone_number")
+	private String phone_number;
 
-	public Long getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -54,6 +58,14 @@ public class UserEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
 	}
 	
 }

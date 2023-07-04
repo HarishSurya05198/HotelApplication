@@ -12,36 +12,40 @@ import com.hotel.booking.repository.UserRepository;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private UserRepository us;
-	
+
 	public boolean addUser(UserModel u) {
 		try {
 			UserEntity users = new UserEntity();
-			users.setName(u.getName());
-			users.setEmail(u.getEmail());
-			users.setPassword(u.getPassword());
-			us.save(users);
-			return true;
-		}
-		catch (Exception e) {
+			UserEntity check = us.findByEmail(u.getEmail());
+			if (check == null) {
+				users.setName(u.getName());
+				users.setEmail(u.getEmail());
+				users.setPassword(u.getPassword());
+				users.setPhone_number(u.getPhone());
+				us.save(users);
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
 			return false;
 		}
 	}
-	
-	public UserEntity loginUser(UserModel u){
+
+	public UserEntity loginUser(UserModel u) {
 		try {
 			UserEntity users = new UserEntity();
 			UserEntity resp = null;
 			users.setEmail(u.getEmail());
 			resp = us.findByEmail(users.getEmail());
 			return resp;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
-		
+
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.booking.entity.HotelEntity;
@@ -23,6 +24,12 @@ public class HotelController {
 	@GetMapping(value="get/hotels")
 	public List<HotelEntity> gethotels(){
 		List<HotelEntity> resp = hotel.getAllHotels();
+		return resp;
+	}
+	
+	@GetMapping(value = "get/hotelsForDates")
+	public List<HotelEntity> getHotelBasedonDates(@RequestParam String start_date,@RequestParam String end_date){
+		List<HotelEntity> resp = hotel.getHotels(start_date,end_date);
 		return resp;
 	}
 	
